@@ -1,0 +1,30 @@
+import pandas as pd
+data = pd.read_excel('C:/Users/82104/m1.xlsx')
+data.head(27)
+data["유아"]=(data["영유아(0~5)"]+data["유아(6~7)"])
+del data["영유아(0~5)"]
+del data["유아(6~7)"]
+data["학생"]=(data["초등(8~13)"]+data["청소년(14~19)"])
+del data["초등(8~13)"]
+del data["청소년(14~19)"]
+
+
+
+
+import matplotlib.pyplot as plt
+plt.rc('font',family='Malgun Gothic')
+fig = plt.figure(figsize=(10,10)) ## 캔버스 생성
+fig.set_facecolor('white') ## 캔버스 색상 설정
+ax = fig.add_subplot() ## 그림 뼈대(프레임) 생성
+ax.plot(data['월'],data['유아'],label='유아') 
+ax.plot(data['월'],data['학생'],label='학생') 
+ax.plot(data['월'],data['20대'],label='20대') 
+ax.plot(data['월'],data['30대'],label='30대') 
+ax.plot(data['월'],data['40대'],label='40대') 
+ax.plot(data['월'],data['50대'],label='50대') 
+ax.plot(data['월'],data['60대 이상'],label='60대이상') 
+
+plt.legend()
+plt.xticks(rotation=45) ## x축 눈금 라벨 설정 - 40도 회전 
+plt.title('연령별 도서관 이용',fontsize=20) ## 타이틀 설정
+plt.show()
